@@ -1,0 +1,37 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Movie Sharing";
+}
+
+<div>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">What Todo</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td scope="row"> <a class="nav-link text-dark" asp-area="" asp-page="/Movies/Index">My Movies</a></td>
+    </tr>
+    <tr>
+      <td scope="row"> 
+       <a class="nav-link text-dark" asp-area="" asp-page="/Movies/Available">Available</a>
+      </td>
+    </tr>
+    <tr>
+      <td scope="row"> 
+       <a class="nav-link text-dark" asp-area="" asp-page="/Categories/Index">Categories</a>
+      </td>
+    </tr>
+        <tr>
+      <td scope="row"> 
+      <a class="nav-link text-dark" asp-area="" asp-page="/Impersonate/Index">Impersonate</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>

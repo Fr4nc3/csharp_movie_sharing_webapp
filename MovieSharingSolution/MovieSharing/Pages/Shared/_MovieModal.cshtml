@@ -1,0 +1,73 @@
+<div class="modal fade" id="movieModal" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="movieModalLabel"><span class="movieActionTitle text-capitalize"></span></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+<h3 class="movieMessage"></h3>
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            Title
+        </dt>
+        <dd class="col-sm-10">
+         <span class="spTitle"></span>  
+        </dd>
+        <dt class="col-sm-2">
+            Category
+        </dt>
+        <dd class="col-sm-10">
+           <span class="spCategory"></span>  
+        </dd>
+        <dt class="col-sm-2 displaySharedUser">
+            Shared User
+        </dt>
+        <dd class="col-sm-10 displaySharedUser">
+            <span class="spSharedUser"></span>  
+        </dd>
+        <dt class="col-sm-2 displaySharedEmail">
+            Shared Email
+        </dt>
+        <dd class="col-sm-10 displaySharedEmail">
+             <span class="spSharedEmail"></span>  
+        </dd>
+        <dt class="col-sm-2 displaySharedDate">
+            Shared Date
+        </dt>
+        <dd class="col-sm-10  displaySharedDate">
+             <span class="spSharedDate"></span>  
+        </dd>
+       <dt class="col-sm-2">
+            Status
+        </dt>
+        <dd class="col-sm-10">
+            <span class="spStatus"></span>  
+        </dd>
+        <dt class="col-sm-2">
+            Is Sharable
+        </dt>
+        <dd class="col-sm-10">
+             <span class="spSharable"></span>  
+        </dd>
+    </dl>
+    
+
+</div>
+      </div>
+      <div class="modal-footer">
+       
+     <form method="post">
+        <input type="hidden"  id="Movie_ID" name="id" value="" />
+        <input type="hidden"  id="Movie_ACTION" name="action" value="" />
+        <input type="submit" value="" class="btn"  id="action_btn"/> 
+    </form>
+     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

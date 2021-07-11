@@ -1,0 +1,89 @@
+﻿@page
+@using MovieSharing.Common
+@using MovieSharing.Models
+@model MovieSharing.Pages.Movies.AvailableModel
+
+@{
+    ViewData["Title"] = "Available Movie List";
+}
+
+<h1>Available Movies</h1>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr scope="col">
+                <th>
+                    @Html.DisplayNameFor(model => model.Movies[0].Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Movies[0].Category)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Movies[0].SharedDate)
+                </th>
+                  <th>
+                    @Html.DisplayNameFor(model => model.Movies[0].OwnerName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Movies[0].Status)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Movies)
+            {
+                <tr scope="row">
+                    <td class="movieTitle">
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td class="movieCategory">
+                        @Html.DisplayFor(modelItem => item.Category)
+                    </td>
+
+                    <td class="movieSharedDate">
+                        @if (item.SharedDate.GetHashCode() != 0)
+                        {
+                            @Html.DisplayFor(modelItem => item.SharedDate)
+                        }
+                    </td>
+                    <td class="movieOwner">
+                        @Html.DisplayFor(modelItem => item.OwnerName)
+                    </td>
+                    <td class="movieStatus">
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td class="actionsButtons">
+                        <button class="btn btn-info openModal" data-toggle="modal" data-shared="@item.IsSharable" data-id="@item.ID" data-target="#movieModal" data-action="@StatusResponse.GetAction(ActionStatus.Details)">View</button>
+                        @if (item.SharedWithEmailAddress == Model.email)
+                        {
+                            if (item.Status == StatusResponse.GetMovieStatus(MovieStatus.Borrowed))// user has the movie
+                            {
+                                <button class="btn btn-primary openModal" data-toggle="modal" data-shared="@item.IsSharable" data-id="@item.ID" data-target="#movieModal" data-action="@StatusResponse.GetAction(ActionStatus.ReturnMovie)">Return</button>
+                            }
+                            if(item.Status == StatusResponse.GetMovieStatus(MovieStatus.ReturnInProcess)) // user started return process
+                            {
+                                <button class="btn btn-warning openModal" data-toggle="modal"  data-shared="@item.IsSharable" data-id="@item.ID" data-target="#movieModal" data-action="@StatusResponse.GetAction(ActionStatus.CancelReturn)">Cancel Return</button> 
+                            }
+                            if (item.Status == StatusResponse.GetMovieStatus(MovieStatus.RequestInProgress)) // user start borrow process
+                            {
+                                <button class="btn btn-dark openModal" data-toggle="modal" data-shared="@item.IsSharable" data-id="@item.ID" data-target="#movieModal" data-action="@StatusResponse.GetAction(ActionStatus.CancelBorrow)">Cancel Borrow</button>
+                            }
+                            if (item.Status ==  StatusResponse.GetMovieStatus(MovieStatus.RequestReturn)) // owner requested return movie
+                            {
+                                <button class="btn btn-warning openModal" data-toggle="modal" data-shared="@item.IsSharable" data-id="@item.ID" data-target="#movieModal" data-action="@StatusResponse.GetAction(ActionStatus.ForceReturn)">Accept Return</button>
+                            }
+                        }
+                        @if (String.IsNullOrEmpty(item.SharedWithEmailAddress))
+                        {
+                            <button class="btn btn-success openModal" data-toggle="modal" data-shared="@item.IsSharable" data-id="@item.ID" data-target="#movieModal" data-action="@StatusResponse.GetAction(ActionStatus.BorrowMovie)">Borrow</button>
+                        }
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<partial name="_MovieModal" />
